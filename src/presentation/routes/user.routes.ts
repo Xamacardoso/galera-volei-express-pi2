@@ -3,7 +3,7 @@ import { createUserController } from "../controllers/user.controller";
 import { validate } from "../middlewares/validateMiddleware";
 import { createUserSchema } from "../schema/user.schema";
 
-const router = Router();
+const userRouter = Router();
 
 /**
  * @openapi
@@ -28,6 +28,6 @@ const router = Router();
  *       400:
  *         description: Bad Request (validation error)
  */
-router.post('/', validate(createUserSchema), createUserController);
+userRouter.post('/', validate(createUserSchema), createUserController);
 
-export default router;
+export default userRouter;

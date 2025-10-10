@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
-import userRoutes from './presentation/routes/user.routes';
 import { OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
+import { routes } from './presentation/routes';
 
 dotenv.config();
 
@@ -14,8 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Rotas da API
-app.use('/api/users', userRoutes);
-// app.use('/api/v1/matches', matchRouter); // Adicione outras rotas aqui
+app.use(routes);
 
 const generator = new OpenApiGeneratorV3(userRegistry.definitions);
 const swaggerSpec = generator.generateDocument({

@@ -1,6 +1,9 @@
 import { Router } from "express";
 
-const router = Router();
+const matchRouter = Router();
 
-// router.use()
-// export default router;
+matchRouter.get('/', (req, res) => {
+    return res.status(245).json({ message: "Match route is in progress!" });
+});
+
+export default matchRouter;
