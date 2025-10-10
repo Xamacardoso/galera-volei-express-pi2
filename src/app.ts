@@ -2,8 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
-import { swaggerSpec } from './config/swagger';
 import userRoutes from './presentation/routes/user.routes';
+import { OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
 
 dotenv.config();
 
@@ -16,6 +16,22 @@ app.use(express.json());
 // Rotas da API
 app.use('/api/users', userRoutes);
 // app.use('/api/v1/matches', matchRouter); // Adicione outras rotas aqui
+
+const generator = new OpenApiGeneratorV3(userRegistry.definitions);
+const swaggerSpec = generator.generateDocument({
+  openapi: '3.0.0',
+  info: {
+    title: 'Galera Vôlei Express API',
+    version: '1.0.0',
+    description: 'API para gerenciamento de jogadores de vôlei',
+  },
+  servers: [
+    {
+      url: 'http://localhost:3000',
+      description: 'Servidor de desenvolvimento',
+    },
+  ],
+});
 
 // Rota da documentação Swagger
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
