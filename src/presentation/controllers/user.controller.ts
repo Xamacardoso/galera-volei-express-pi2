@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateUserInput, createUserSchema } from "../../users/user.schema";
+import { CreateUserInput, createUserSchema } from "../schema/user.schema";
 import { z } from "zod";
 
 export async function createUserController(req: Request<{}, {}, CreateUserInput>, res: Response) {

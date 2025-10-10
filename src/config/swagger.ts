@@ -1,5 +1,5 @@
 import swaggerJsdoc from 'swagger-jsdoc';
-import { createUserSchema } from '../users/user.schema';
+import { createUserSchema } from '../presentation/schema/user.schema';
 
 const swaggerDefinition = {
   openapi: '3.0.0',
