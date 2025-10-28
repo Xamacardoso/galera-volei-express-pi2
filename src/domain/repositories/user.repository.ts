@@ -1,7 +1,7 @@
 import { User } from "../entities/user";
 
 export interface UserRepository {
-    save(user: User): void;
+    save(user: User): User;
     findAll(): User[];
     findById(id: string): User | null;
 }

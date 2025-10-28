@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 
 // Extende o Zod para suportar OpenAPI, permitindo adicionar metadados aos schemas
@@ -9,7 +9,7 @@ export const createUserSchema = z.object({
     name: z.string().nonempty("Name is required"),
     password: z.string().min(6, "Password must be at least 6 characters long").nonempty("Password is required"),
     invitationCode: z.string().nonempty("Invitation code is required"),
-    age: z.number().min(0, "Age must be a positive number"),
+    age: z.number().min(0, "Age must be a positive number").nonoptional("Age is required"),
     category: z.enum(["BEGINNER", "INTERMEDIATE", "ADVANCED", "PRO"]),
     gender: z.enum(["MALE", "FEMALE"]).nonoptional("Gender is required")
 });

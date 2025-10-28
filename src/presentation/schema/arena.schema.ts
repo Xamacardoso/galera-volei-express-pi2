@@ -2,13 +2,13 @@ import z from "zod";
 
 export const createArenaSchema = z.object({
     name: z.string()
-        .nonempty("O nome da arena é obrigatório")
-        .min(3, "O nome da arena deve ter no mínimo 3 caracteres")
-        .max(60, "O nome da arena deve ter no máximo 60 caracteres"),
+        .nonempty("Arena name is required")
+        .min(3, "The arena name must be at least 3 characters long")
+        .max(60, "The arena name must be at most 60 characters long"),
     address: z.string()
-        .min(3, "O endereço da arena deve ter no mínimo 3 caracteres")
-        .max(120, "O endereço da arena deve ter no máximo 120 caracteres")
-        .optional()
+        .min(3, "The arena address must be at least 3 characters long")
+        .max(120, "The arena address must be at most 120 characters long")
+        .nonoptional("Arena address is required")
 })
 
 export type CreateArenaInput = z.infer<typeof createArenaSchema>;

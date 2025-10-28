@@ -32,5 +32,6 @@ export class ArenaMockRepository implements ArenaRepository {
 
     save(arena: Arena) {
         arenas.push(arena);
+        return arena;
     }
 }

@@ -31,12 +31,14 @@ const users: User[] = [
 export class UserMockRepository implements UserRepository {
     constructor (private users: User[] = users) {}
 
-    save(user: User): void {
+    save(user: User): User {
         users.push(user);
+        return user;
     }
     findAll(): User[] {
         return this.users;
     }
+    
     findById(id: string): User | null {
         const user = this.users.find(user => user.id === id);
         return user || null;

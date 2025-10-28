@@ -25,7 +25,7 @@ export class ArenaController {
     }
 
     public getArena = async (req: Request, res: Response) => {
-        const { id } = req.body;
+        const { id } = req.params;
         const arena = this.arenaService.getArenaById(id);
 
         return res.status(200).json({
