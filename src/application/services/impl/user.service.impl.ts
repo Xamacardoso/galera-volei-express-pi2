@@ -1,21 +1,22 @@
 import { User } from "../../../domain/entities/user";
 import { UserRepository } from "../../../domain/repositories/user.repository";
+import { CreateUserInput } from "../../../presentation/schema/user.schema";
 import { UserService } from "../user.service";
 
 export class UserServiceImpl implements UserService {
-    private UserRepository: UserRepository;
+    private userRepository: UserRepository;
 
     constructor(userRepository: UserRepository) {
-        this.UserRepository = userRepository;
+        this.userRepository = userRepository;
     }
 
-    createUser(input: Omit<User, "id">): User {
+    createUser(input: CreateUserInput): User {
         throw new Error("Method not implemented.");
     }
-    getUsers(): User[] {
+    listUsers(): User[] {
         throw new Error("Method not implemented.");
     }
-    findUserById(id: string): User | null {
+    getUserById(id: string): User | null {
         throw new Error("Method not implemented.");
     }
     

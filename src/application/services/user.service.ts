@@ -1,7 +1,8 @@
 import { User } from "../../domain/entities/user";
+import { CreateUserInput } from "../../presentation/schema/user.schema";
 
 export interface UserService {
-    createUser(input: Omit<User, "id">): User;
-    getUsers(): User[];
-    findUserById(id: string): User | null;
+    createUser(input: CreateUserInput): User;
+    listUsers(): User[];
+    getUserById(id: string): User | null;
 }

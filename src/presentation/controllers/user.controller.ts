@@ -1,39 +1,39 @@
 import { Request, Response } from "express";
 import { CreateUserInput, createUserSchema } from "../schema/user.schema";
-import { z } from "zod";
+import { UserService } from "../../application/services/user.service";
 
-export async function createUserController(req: Request<{}, {}, CreateUserInput>, res: Response) {
-    try {
-        // Validação adicional (opcional, já que o middleware já valida)
-        const parsedData = createUserSchema.parse(req);
-        const userData = parsedData.body;
-        
-        // Lógica de criação do usuário
-        const createdUser = {
-            id: "user_" + Date.now(),
-            name: userData.name,
-            age: userData.age,
-            category: userData.category,
-            gender: userData.gender,
-            createdAt: new Date().toISOString()
-        };
-        
+export class UserController {
+    private userService: UserService;
+
+    constructor (userService: UserService) {
+        this.userService = userService;
+    }
+
+    public listUsers = async (req: Request, res: Response) => {
+        const users = this.userService.listUsers();
+        return res.status(200).json({
+            message: "Users retrieved successfully",
+            data: users
+        });
+    }
+
+    public getUser = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        const user = this.userService.getUserById(id);
+
+        return res.status(200).json({
+            message: "User retrieved successfully",
+            data: user
+        });
+    }
+
+    public createUser = async (req: Request<{}, {}, CreateUserInput>, res: Response) => {  
+        const parsedUser = createUserSchema.parse(req.body);
+        const newUser = this.userService.createUser(parsedUser);
+
         return res.status(201).json({
             message: "User created successfully",
-            data: createdUser
-        });
-        
-    } catch (err) {
-        if (err instanceof z.ZodError) {
-            return res.status(400).json({
-                message: "Validation error",
-                errors: err.issues
-            });
-        }
-        
-        console.error("Error creating user:", err);
-        return res.status(500).json({
-            message: "Internal server error"
+            data: newUser
         });
     }
 }

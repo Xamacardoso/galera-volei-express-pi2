@@ -1,7 +1,8 @@
 import { Arena } from "../../domain/entities/arena";
+import { CreateArenaInput } from "../../presentation/schema/arena.schema";
 
 export interface ArenaService {
-    createArena(input: Omit<Arena, "id">): Arena;
-    getArenas(): Arena[];
-    findArenaById(id: string): Arena | null;
+    createArena(input: CreateArenaInput): Arena;
+    listArenas(): Arena[];
+    getArenaById(id: string): Arena | null;
 }

@@ -1,33 +1,17 @@
 import { Router } from "express";
-import { createUserController } from "../controllers/user.controller";
-import { validate } from "../middlewares/validateMiddleware";
-import { createUserSchema } from "../schema/user.schema";
+import { UserController } from "../controllers/user.controller";
+import { UserServiceImpl } from "../../application/services/impl/user.service.impl";
+import { UserMockRepository } from "../../infrastructure/repositories/user-mock.repository";
 
 const userRouter = Router();
+const userController = new UserController(
+    new UserServiceImpl(
+        new UserMockRepository()
+    )
+);
 
-/**
- * @openapi
- * /api/users:
- *   post:
- *     tags:
- *       - Users
- *     summary: Register a new user
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/CreateUserInput'
- *     responses:
- *       201:
- *         description: User created successfully
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/UserResponse'
- *       400:
- *         description: Bad Request (validation error)
- */
-userRouter.post('/', validate(createUserSchema), createUserController);
+userRouter.post('/', userController.createUser);
+userRouter.get('/', userController.listUsers);
+userRouter.get('/:id', userController.getUser);
 
 export default userRouter;

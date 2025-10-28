@@ -5,7 +5,7 @@ export function generateSwaggerDoc() : object {
   const registry = new OpenAPIRegistry();
 
   // Registrando schemas para serem referenciados
-  registry.register("CreateUserInput", createUserSchema.shape.body);
+  registry.register("CreateUserInput", createUserSchema);
   registry.register("UserResponse", userResponseSchema);
 
   const generator = new OpenApiGeneratorV3(registry.definitions);

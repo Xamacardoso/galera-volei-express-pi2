@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { ArenaController } from "../controllers/arena.controller";
-import { ArenaService } from "../../application/services/arena.service";
 import { ArenaServiceImpl } from "../../application/services/impl/arena.service.impl";
 import { ArenaMockRepository } from "../../infrastructure/repositories/arena-mock.repository";
 
@@ -12,7 +11,7 @@ const arenaController = new ArenaController(
 );
 
 arenaRouter.post("/", arenaController.createArena);
-arenaRouter.get("/", arenaController.getArenas);
-arenaRouter.get("/:id", arenaController.findArenaById);
+arenaRouter.get("/", arenaController.listArenas);
+arenaRouter.get("/:id", arenaController.getArena);
 
 export default arenaRouter;

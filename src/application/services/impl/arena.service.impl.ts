@@ -12,10 +12,10 @@ export class ArenaServiceImpl implements ArenaService {
     createArena(input: Omit<Arena, "id">): Arena {
         throw new Error("Method not implemented.");
     }
-    getArenas(): Arena[] {
+    listArenas(): Arena[] {
         throw new Error("Method not implemented.");
     }
-    findArenaById(id: string): Arena | null {
+    getArenaById(id: string): Arena | null {
         throw new Error("Method not implemented.");
     }
     
